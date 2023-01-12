@@ -132,3 +132,5 @@ dmypy.json
 *_tweetcapture*.png
 tweetcapture/tests/*.png
 tweetcapture/tests/*.jpg
+
+.DS_Store

@@ -23,7 +23,7 @@ setuptools.setup(
     description="Take a tweet screenshot",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Xacnio/tweetcapture",
+    url="https://github.com/danchenkov/tweetcapture",
     packages=setuptools.find_packages(),
     install_requires=get_requirements(),
     entry_points={
@@ -32,6 +32,8 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],

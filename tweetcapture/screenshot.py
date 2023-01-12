@@ -52,7 +52,7 @@ class TweetCapture:
         if self.lang:
             url += "?lang=" + self.lang
 
-            
+
         radius = self.radius if radius is None else radius
         driver = await get_driver(self.chrome_opts, self.driver_path, self.gui)
         try:
@@ -61,11 +61,11 @@ class TweetCapture:
                 {"name": "night_mode", "value": str(self.night_mode if night_mode is None else night_mode)})
             driver.get(url)
             await sleep(self.wait_time)
-           
+
             self.__hide_global_items(driver)
             driver.execute_script("!!document.activeElement ? document.activeElement.blur() : 0")
 
-            if self.test is True: 
+            if self.test is True:
                 driver.save_screenshot(f"web{self.__web}.png")
                 self.__web += 1
             await sleep(2.0)
@@ -81,11 +81,11 @@ class TweetCapture:
                             driver.execute_script(self.__code_footer_items(self.mode if mode is None else mode), element.find_element(By.CSS_SELECTOR, "div.r-1ta3fxp"), element.find_element(By.CSS_SELECTOR, ".r-1hdv0qi:first-of-type"))
                         except:
                             pass
-                    
+
                     self.__hide_media(element, self.hide_link_previews, self.hide_photos, self.hide_videos, self.hide_gifs, self.hide_quotes)
                     if i == len(elements)-1:
                         self.__margin_tweet(self.mode if mode is None else mode, element)
-                        
+
             if len(elements) == 1:
                 elements[0].screenshot(path)
                 if radius > 0:
@@ -121,20 +121,20 @@ class TweetCapture:
                     y += im.size[1]
                     im.close()
                     remove(im.filename)
-                
+
                 if radius > 0:
                     new_im = add_corners(new_im, self.radius)
                 new_im.save(path)
                 new_im.close()
-  
+
             driver.quit()
         except Exception as err:
             driver.quit()
             raise err
         return path
-        
+
     def set_wait_time(self, time):
-        if 1.0 <= time <= 10.0: 
+        if 1.0 <= time <= 10.0:
             self.wait_time = time
 
     def get_night_mode(self):
@@ -186,13 +186,13 @@ class TweetCapture:
             return """
             arguments[1].style.display="none";
             """
-    
+
     def hide_all_media(self):
         self.hide_link_previews = True
         self.hide_photos = True
         self.hide_videos = True
         self.hide_gifs = True
-        self.hide_quotes = True  
+        self.hide_quotes = True
 
     def hide_media(self, link_previews=None, photos=None, videos=None, gifs=None, quotes=None):
         if link_previews is not None: self.hide_link_previews = link_previews
@@ -277,7 +277,7 @@ class TweetCapture:
                     element.parent.execute_script("""
                     arguments[0].style.display="none";
                     """, el)
-        
+
         brdr = element.find_elements(By.XPATH, XPATHS[2])
         if len(brdr) == 1:
             element.parent.execute_script("""
@@ -308,7 +308,7 @@ class TweetCapture:
                     r = main_element+1
                     r2 = r+show_mentions_count
                     if show_parents and show_mentions_count > 0:
-                        if len(elements[r:]) > show_mentions_count:                   
+                        if len(elements[r:]) > show_mentions_count:
                             return (elements[0:r] + elements[r:r2]), main_element
                         return elements, main_element
                     elif show_parents:
@@ -323,6 +323,6 @@ class TweetCapture:
                     else:
                         return elements[main_element:r], 0
         return [], -1
-    
+
     def set_gui(self, gui):
         self.gui = True if gui is True else False

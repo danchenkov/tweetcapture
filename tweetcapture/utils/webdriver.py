@@ -5,6 +5,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from .utils import get_chromedriver_default_path
 
 async def get_driver(custom_options=None, driver_path=None, gui=False):
+
+    dpr = 2.0
     chrome_options = Options()
     if gui is False:
         chrome_options.add_argument("--headless")
@@ -15,6 +17,7 @@ async def get_driver(custom_options=None, driver_path=None, gui=False):
     chrome_options.add_argument('--ignore-certificate-errors')
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=768,2000");
+    chrome_options.add_argument(f"--force-device-scale-factor={dpr}")
     chrome_options.add_argument("--remote-debugging-port=9222")
     chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
 
